@@ -86,6 +86,10 @@ resource "openstack_compute_instance_v2" "worker" {
   ]
 
   user_data = data.template_file.worker-cloud-init.rendered
+
+  lifecycle {
+    ignore_changes = [user_data]
+  }
 }
 
 resource "openstack_networking_floatingip_v2" "worker_ext" {

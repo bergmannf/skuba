@@ -72,6 +72,10 @@ resource "openstack_compute_instance_v2" "master" {
   ]
 
   user_data = data.template_file.master-cloud-init.rendered
+
+  lifecycle {
+    ignore_changes = [user_data]
+  }
 }
 
 resource "openstack_networking_floatingip_v2" "master_ext" {
